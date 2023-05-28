@@ -6,52 +6,50 @@ import pickle
 
 class Field():
     def __init__(self, value):
+        self.__value = value
         self.value = value
-
+        
     def __repr__(self) -> str:
         return self.value
-    
 
+    @property
+    def value(self):
+        return self.__value    
+
+    @value.setter
+    def value(self, value):
+        self.__value = value
 
 
 class Name(Field):
     def __init__(self, value):
-        super().__init__(value)
-
-
-
-class Phone(Field):
-    def __init__(self):
-        self.__value = None
-
-    @property
-    def value(self):
-        return self.__value
+        self.value = value
     
-    @value.setter
+    
+class Phone(Field):
+    def __init__(self, value):
+        self.value = value
+        
+    @Field.value.setter
     def value(self, new_value):
         new_value = verifications.check_phone_number(new_value)
         if not new_value:
             return
         else:
-            self.__value = new_value
+            Field.value.fset(self, new_value)
 
 
 class Birthday(Field):
-    def __init__(self):
-        self.__value = None
-
-    @property
-    def value(self):
-        return self.__value
-    
-    @value.setter
+    def __init__(self, value):
+        self.value = value
+        
+    @Field.value.setter
     def value(self, new_value):
         new_value = verifications.check_birthday(new_value)
         if not new_value:
             return
         else:
-            self.__value = new_value
+            Field.value.fset(self, new_value)
  
 
 class Record():

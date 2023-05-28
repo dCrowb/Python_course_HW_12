@@ -10,15 +10,15 @@ def add_contact(name: str, phone, birthday):
     record = classes.Record(name_obj)
     result = f'Contact: {name} have been created'
     if phone:
-        phone_obj = classes.Phone()
-        phone_obj.value = phone
+        phone_obj = classes.Phone(phone)
+        # phone_obj.value = phone
         if phone_obj.value == 'Incorrect phone number':
             return 'Incorrect phone number'
         record.add_phone(phone_obj)
         result +=  f'with phone: {phone}'
     if birthday:
-        birthday_obj = classes.Birthday()
-        birthday_obj.value = birthday
+        birthday_obj = classes.Birthday(birthday)
+        # birthday_obj.value = birthday
         if not birthday_obj.value:
             return 'Incorrect birthday!'
         record.add_birthday(birthday_obj)
@@ -35,8 +35,8 @@ def change_contact(name: str, phone: str):
         result = f'Contact {name} not found in Address book!'
         return result
     elif name in address_book.contact_book.data and phone not in address_book.contact_book.data[name].get_list_phones():
-        phone_obj = classes.Phone()
-        phone_obj.value = phone
+        phone_obj = classes.Phone(phone)
+        # phone_obj.value = phone
         if phone_obj.value == 'Incorrect phone number':
             return 'Incorrect phone number'
         address_book.contact_book.data[name].add_phone(phone_obj)
@@ -66,8 +66,8 @@ def replace_phone(name: str, phone: str, new_phone: str):
         result = f'Contact {name} not found in Address book!'
         return result
     elif name in address_book.contact_book.data and phone in address_book.contact_book.data[name].get_list_phones():
-        new_phone_obj = classes.Phone()
-        new_phone_obj.value = new_phone
+        new_phone_obj = classes.Phone(new_phone)
+        # new_phone_obj.value = new_phone
         if new_phone_obj.value == 'Incorrect phone number':
             return 'Incorrect phone number'
         address_book.contact_book.data[name].change_phone(phone, new_phone)
@@ -114,12 +114,12 @@ def change_birthday(name: str, birthday: str):
         result = f'Contact {name} not found in Address book!'
         return result
     elif name in address_book.contact_book.data:
-        birthday_obj = classes.Birthday()
-        birthday_obj.value = birthday
+        birthday_obj = classes.Birthday(birthday)
+        # birthday_obj.value = birthday
         if not birthday_obj.value:
             return 'Incorrect birthday!'
         address_book.contact_book.data[name].add_birthday(birthday_obj)
-        result = f'Contact {name} has been added phone: {birthday}!'
+        result = f'Contact {name} has been added birthday: {birthday}!'
         address_book.contact_book.save_address_book()
     return result
 

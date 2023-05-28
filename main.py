@@ -70,7 +70,6 @@ def command_parser(user_input: str):
         parsed_args = build_parser(arguments)
         return command_elements[0], parsed_args
 
-finish line ХВfinished HW
 def main():
     '''---------------------------
         add -n [name] (optional: -p [phone] -b [birthday]) - add new contact.
